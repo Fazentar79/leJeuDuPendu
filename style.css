@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'creativo';
+    src: url(src/fonts/creativoRegular.otf);
+}
+
+*, ::before , ::after {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+}
+
+body {
+    font-family: 'creativo', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+}
+
+header {
+    text-align: center;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#paper {
+    width: 100%;
+    height: 100%;  
+}
+
+#paper img {
+    width: 55%;
+    box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.75);
+        -webkit-box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.75);
+}
