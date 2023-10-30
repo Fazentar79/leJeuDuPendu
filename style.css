@@ -8,6 +8,10 @@
     margin: 0; padding: 0;
 }
 
+html {
+    min-width: 1200px;
+}
+
 body {
     font-family: 'creativo', sans-serif;
     font-size: 1rem;
@@ -21,9 +25,11 @@ header {
 
 h1 {
     font-size: 4rem;
-    font-weight: 500;
-    line-height: 1.5;
-    margin-bottom: 2rem;
+    font-weight: lighter;
+}
+
+li {
+    list-style-type: none;
 }
 
 .flex {
@@ -32,19 +38,91 @@ h1 {
     align-items: center;
 }
 
+.flex__column {
+    display: flex;
+    flex-direction: column;
+}
+
+.text {
+   z-index: 1;
+    position: absolute;
+    text-align: center;
+    margin: 0 auto; 
+}
+
 .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+}
+
+.text__title {    
+    left: 0;
+    right: -10%;
+    top: 6%;
+}
+
+.text__menu {    
+    left: -56.5%;
+    right: 0;
+    top: 13%;
+    z-index: 2;
+    width: 13%;
+}
+
+.text__menu li {
+    font-size: 1.2rem;
+    line-height: 2.3em;
+    cursor: pointer;
+}
+
+.text__menu li:hover {
+    border: black solid 1px;
+    border-radius: 5px;
+}
+
+.text__theme {
+    font-size: 2.5em;
+    left: 0;
+    right: 20%;
+    top: 19.5%;
+}
+
+.text__wordToFind {
+    font-size: 4em;
+    text-transform: uppercase;
+    left: 0;
+    right: -6%;
+    top: 58%;
+}
+
+.text__alphabet {    
+    left: 0;
+    right: -12%;
+    top: 72.5%;
+}
+
+.text__alphabet li {
+    display: inline-block;
+    font-size: 2.5rem;
+    line-height: 3.2em;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.text__alphabet li:hover {
+    transform: scale(1.2);
 }
 
 #paper {
     width: 100%;
-    height: 100%;  
+    height: 100%;
+    margin: 1rem auto;
 }
 
 #paper img {
-    width: 55%;
+    width: 70%;
     box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.75);
         -webkit-box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.75);
         -moz-box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.75);
