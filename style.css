@@ -70,33 +70,7 @@ p {
 }
 
 .rules__modal-content {
-    margin-top: 12px;
-}
-
-.theme__modal-content {
-    margin-top: 12px;
-}
-
-/* Placement des différents bouton de fermeture des modals */
-
-.close {
-    position: absolute;
-    top: -5%;
-    right: 40%;
-    font-size: 2rem;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 0.5rem;
-    color: #333;
-}
-
-.close__rules {
-    margin-top: 5px;    
-}
-
-.close__theme {
-    margin-top: 10px;
-    top: -15%;    
+    margin-top: 11px;
 }
 
 /* Placement des éléments texte */
@@ -129,12 +103,17 @@ p {
 .text__theme {
     font-size: 2.5em;
     left: 0;
-    right: 20%;
+    right: 0;
     top: 19.5%;
 }
 
 .text__menu-findWord {
-    display: block;
+    margin-top: 130px;
+}
+
+.text__menu-findWord span {
+    font-size: 1.3em;
+    font-weight: 500;
 }
 
 .text__wordToFind {

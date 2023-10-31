@@ -18,9 +18,7 @@
               <li class="text__menu-rules">Règles</li>
               <div class="rules__modal">
                 <div class="rules__modal-content">
-                  <span class="close close__rules">&times;</span>
                   <p>
-                    Voici les règles : <br /><br />
                     Le jeu du pendu est un jeu consistant à trouver un mot en
                     devinant quelles sont les lettres qui le composent avant que
                     notre personnage ne soit pendu. Ici vous jouez contre
@@ -37,18 +35,20 @@
               <li class="text__menu-theme">Changer de thème</li>
               <div class="theme__modal">
                 <div class="theme__modal-content">
-                  <span class="close close__theme">&times;</span>
-                  <p>Choisissez un thème :</p>
                   <ul>
-                    <li>Animaux</li>
-                    <li>Pays</li>
-                    <li>Fruits et légumes</li>
-                    <li>Objets du quotidien</li>
-                    <li>Films</li>
+                    <li class="theme__choice--animals">Animaux</li>
+                    <li class="theme__choice--pays">Pays</li>
+                    <li class="theme__choice--fruitsAndVegetables">
+                      Fruits et légumes
+                    </li>
+                    <li class="theme__choice--everydayObjects">
+                      Objets du quotidien
+                    </li>
+                    <li class="theme__choice--movies">Films</li>
                   </ul>
                 </div>
               </div>
-              <li class="text__menu-findWord">Mot trouvé ?</li>
+              <li class="text__menu-findWord"><span>Mot trouvé ?</span></li>
             </ul>
           </nav>
         </header>
@@ -57,7 +57,7 @@
           alt="Image de feuille de papier"
         />
 
-        <div class="text text__theme">Thème :</div>
+        <div class="text text__theme"></div>
         <div class="text text__wordToFind">mot à trouver</div>
         <div class="text text__alphabet">
           <ul>

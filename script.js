@@ -1,43 +1,81 @@
+// Variables des modals
 let rulesModal = document.querySelector(".rules__modal");
 let btnRules = document.querySelector(".text__menu-rules");
-let btnCloseRules = document.querySelector(".close__rules");
-
 let themeModal = document.querySelector(".theme__modal");
 let btnTheme = document.querySelector(".text__menu-theme");
-let btnCloseTheme = document.querySelector(".close__theme");
 
+// Variables des choix de thème
+let btnChoiceAnimals = document.querySelector(".theme__choice--animals");
+let btnChoicePays = document.querySelector(".theme__choice--pays");
+let btnChoiceFruitsAndVegetables = document.querySelector(".theme__choice--fruitsAndVegetables");
+let btnChoiceEverydayObjects = document.querySelector(".theme__choice--everydayObjects");
+let btnChoiceMovies = document.querySelector(".theme__choice--movies");
+
+// Variables pour le DOM
 let findWord = document.querySelector(".text__menu-findWord");
 
 let choiceTheme = document.querySelector(".text__theme");
 
+// Variables pour le jeu
+let choiceStartTheme = choiceTheme.textContent = "Choisir un thème";
+
 // Affiche ou cache les modals
-btnRules.addEventListener("click", () => {
-    rulesModal.style.display = "block";
-    btnRules.style.display = "none";
-    btnTheme.style.display = "none";
-});
+function toggleModalRules() {
+    if (rulesModal.style.display === "none" || btnRules.addEventListener("mouseover", toggleModalRules)) {
+        rulesModal.style.display = "block";
+        btnTheme.style.display = "none";
+    }else {
+        rulesModal.style.display = "none";
+        btnTheme.style.display = "block";
+    }
+}
 
-btnCloseRules.addEventListener("click", () => {
-    rulesModal.style.display = "none";
-    btnRules.style.display = "block";
-    btnTheme.style.display = "block";
-});
-
-btnTheme.addEventListener("click", () => {
+btnRules.addEventListener("mouseout", toggleModalRules);
+btnTheme.addEventListener("click", () => { 
     themeModal.style.display = "block";
-    btnTheme.style.display = "none";
     btnRules.style.display = "none";
 });
 
-btnCloseTheme.addEventListener("click", () => {
+// Choix du thème
+
+btnChoiceAnimals.addEventListener("click", () => {
+    choiceTheme.textContent = "";
+    choiceTheme.textContent = "Thème choisi : Animaux";
     themeModal.style.display = "none";
-    btnTheme.style.display = "block";
+    btnRules.style.display = "block";
+});
+
+btnChoicePays.addEventListener("click", () => {
+    choiceTheme.textContent = "";
+    choiceTheme.textContent = "Thème choisi : Pays";
+    themeModal.style.display = "none";
+    btnRules.style.display = "block";
+});
+
+btnChoiceFruitsAndVegetables.addEventListener("click", () => {
+    choiceTheme.textContent = "";
+    choiceTheme.textContent = "Thème choisi : Fruits et légumes";
+    themeModal.style.display = "none";
+    btnRules.style.display = "block";
+});
+
+btnChoiceEverydayObjects.addEventListener("click", () => {
+    choiceTheme.textContent = "";
+    choiceTheme.textContent = "Thème choisi : Objets du quotidien";
+    themeModal.style.display = "none";
+    btnRules.style.display = "block";
+});
+
+btnChoiceMovies.addEventListener("click", () => {
+    choiceTheme.textContent = "";
+    choiceTheme.textContent = "Thème choisi : Films";
+    themeModal.style.display = "none";
     btnRules.style.display = "block";
 });
 
 // Tableaux de mots
 
-const Animals = [
+const animals = [
   "Lion", "Éléphant", "Tigre", "Girafe", "Kangourou", "Hippopotame",
   "Penguin", "Zèbre", "Koala", "Panda", "Rhino", "Ours Polaire",
   "Guépard", "Gorille", "Koala", "Dauphin", "Hérisson", "Léopard",
