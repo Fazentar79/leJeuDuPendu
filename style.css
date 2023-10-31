@@ -32,6 +32,13 @@ li {
     list-style-type: none;
 }
 
+p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+/* Classes pour directement initialisé les flex et les éléments*/
+
 .flex {
     display: flex;
     justify-content: center;
@@ -56,6 +63,43 @@ li {
     margin: 0 auto;
     position: relative;
 }
+/* Modals du menu */
+
+.rules__modal, .theme__modal {
+    display: none;
+}
+
+.rules__modal-content {
+    margin-top: 12px;
+}
+
+.theme__modal-content {
+    margin-top: 12px;
+}
+
+/* Placement des différents bouton de fermeture des modals */
+
+.close {
+    position: absolute;
+    top: -5%;
+    right: 40%;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: #333;
+}
+
+.close__rules {
+    margin-top: 5px;    
+}
+
+.close__theme {
+    margin-top: 10px;
+    top: -15%;    
+}
+
+/* Placement des éléments texte */
 
 .text__title {    
     left: 0;
@@ -89,12 +133,16 @@ li {
     top: 19.5%;
 }
 
+.text__menu-findWord {
+    display: block;
+}
+
 .text__wordToFind {
-    font-size: 4em;
+    font-size: 3.5em;
     text-transform: uppercase;
     left: 0;
     right: -6%;
-    top: 58%;
+    top: 59%;
 }
 
 .text__alphabet {    
@@ -114,6 +162,8 @@ li {
 .text__alphabet li:hover {
     transform: scale(1.2);
 }
+
+/* ID */
 
 #paper {
     width: 100%;
