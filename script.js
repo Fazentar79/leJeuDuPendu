@@ -1,10 +1,11 @@
-// Variables des modals
+// Variables de sélection des modals
 let rulesModal = document.querySelector(".rules__modal");
 let btnRules = document.querySelector(".text__menu-rules");
 let themeModal = document.querySelector(".theme__modal");
 let btnTheme = document.querySelector(".text__menu-theme");
+let btnReload = document.querySelector(".text__menu-reload");
 
-// Variables des choix de thème
+// Variables de sélection des choix de thème
 let btnChoiceAnimals = document.querySelector(".theme__choice--animals");
 let btnChoicePays = document.querySelector(".theme__choice--pays");
 let btnChoiceFruitsAndVegetables = document.querySelector(".theme__choice--fruitsAndVegetables");
@@ -13,154 +14,247 @@ let btnChoiceMovies = document.querySelector(".theme__choice--movies");
 
 // Variables pour le DOM
 let findWord = document.querySelector(".text__menu-findWord");
-
+let wordToFind = document.querySelector(".text__wordToFind");
 let choiceTheme = document.querySelector(".text__theme");
+let letters = document.querySelectorAll(".letter");
+let hangmanImage = document.querySelector(".hangman__image");
 
 // Variables pour le jeu
-let choiceStartTheme = choiceTheme.textContent = "Choisir un thème";
+let choiceStartTheme = choiceTheme;
+let ChosenLetter;
+let chosenTheme;
+let wordToGuess;
+let wordToDisplay = [];
+let life = 0;
 
 // Affiche ou cache les modals
 function toggleModalRules() {
     if (rulesModal.style.display === "none" || btnRules.addEventListener("mouseover", toggleModalRules)) {
         rulesModal.style.display = "block";
         btnTheme.style.display = "none";
+        findWord.style.display = "none";
+        btnReload.style.display = "none";
     }else {
         rulesModal.style.display = "none";
         btnTheme.style.display = "block";
+        findWord.style.display = "block";
     }
 }
 
+function toggleMenu () {
+    themeModal.style.display = "none";
+    btnRules.style.display = "block";
+    findWord.style.display = "block";
+}
+
+function toggleReload() {
+    btnTheme.style.display = "none";
+    btnReload.style.display = "block";
+}
+
 btnRules.addEventListener("mouseout", toggleModalRules);
+
 btnTheme.addEventListener("click", () => { 
     themeModal.style.display = "block";
     btnRules.style.display = "none";
+    findWord.style.display = "none";
+});
+
+// Thème de départ
+choiceStartTheme.textContent = "Choisissez un thème dans la marge.";
+
+//Choix aléatoire du mot à deviner selon le thème choisi
+function randomWord() {
+    wordToGuess = chosenTheme[Math.floor(Math.random() * chosenTheme.length)];
+}
+
+// Logique pour afficher les underscore et les espaces du mot à deviner
+function underscore() {
+    for (let i = 0; i < wordToGuess.length; i++) {
+        if (wordToGuess[i] != " ") {
+            wordToFind.textContent += "_";
+        } else if (wordToGuess[i] === " ") {
+            wordToFind.textContent += " ";
+        } else {
+            wordToDisplay[i] = wordToGuess[i];
+        }
+    }
+}
+
+// Défaite ou victoire
+function loseOrWin() {
+    if (life === 10) {
+        alert("Vous avez perdu ! Le mot était : " + wordToGuess + ".");
+        location.reload();
+    }else if (wordToFind.textContent === wordToGuess) {
+        alert("Vous avez gagné ! Le mot est : " + wordToGuess + ".");
+        location.reload();
+    }
+}
+
+// Logique du jeu
+function checkLetter() {
+    let wrongLetter = false;
+    for (let i = 0; i < wordToDisplay.length; i++) {
+        if (ChosenLetter === wordToDisplay[i]) {
+            wordToFind.textContent = wordToFind.textContent.substring(0, i) + ChosenLetter + wordToFind.textContent.substring(i + 1);
+            wrongLetter = true;
+        }
+        else if (!wrongLetter) {     
+            life++;
+            hangmanImage.style.display = "block";
+            console.log(life);            
+        }
+        loseOrWin(); 
+    }    
+}
+
+// Reload du jeu
+btnReload.addEventListener("click", () => {
+    location.reload();
+});
+
+// Choix de lettre
+letters.forEach((letter) => {
+    letter.addEventListener("click", () => {
+        ChosenLetter = letter.outerText;
+        checkLetter();
+    });
 });
 
 // Choix du thème
-
 btnChoiceAnimals.addEventListener("click", () => {
     choiceTheme.textContent = "";
     choiceTheme.textContent = "Thème choisi : Animaux";
-    themeModal.style.display = "none";
-    btnRules.style.display = "block";
+    toggleMenu();
+    btnRules.style.display = "none";
+    chosenTheme = animals;
+    randomWord();
+    wordToDisplay = wordToGuess.split("");
+    underscore();
+    console.log(wordToDisplay);
+    toggleReload();
 });
 
 btnChoicePays.addEventListener("click", () => {
     choiceTheme.textContent = "";
     choiceTheme.textContent = "Thème choisi : Pays";
-    themeModal.style.display = "none";
-    btnRules.style.display = "block";
+    toggleMenu();
+    btnRules.style.display = "none";
+    chosenTheme = countries;
+    randomWord();
+    wordToDisplay = wordToGuess.split("");
+    underscore();
+    console.log(wordToDisplay);
+    toggleReload();
 });
 
 btnChoiceFruitsAndVegetables.addEventListener("click", () => {
     choiceTheme.textContent = "";
     choiceTheme.textContent = "Thème choisi : Fruits et légumes";
-    themeModal.style.display = "none";
-    btnRules.style.display = "block";
+    toggleMenu();
+    btnRules.style.display = "none";
+    chosenTheme = fruitsAndVegetables;
+    randomWord();
+    wordToDisplay = wordToGuess.split("");
+    underscore();
+    console.log(wordToDisplay);
+    toggleReload();
 });
 
 btnChoiceEverydayObjects.addEventListener("click", () => {
     choiceTheme.textContent = "";
     choiceTheme.textContent = "Thème choisi : Objets du quotidien";
-    themeModal.style.display = "none";
-    btnRules.style.display = "block";
+    toggleMenu();
+    btnRules.style.display = "none";
+    chosenTheme = everydayObjects;
+    randomWord();
+    wordToDisplay = wordToGuess.split("");
+    underscore();
+    console.log(wordToDisplay);
+    toggleReload();
 });
 
 btnChoiceMovies.addEventListener("click", () => {
     choiceTheme.textContent = "";
     choiceTheme.textContent = "Thème choisi : Films";
-    themeModal.style.display = "none";
-    btnRules.style.display = "block";
+    toggleMenu();
+    btnRules.style.display = "none";
+    chosenTheme = movies;
+    randomWord();
+    wordToDisplay = wordToGuess.split("");
+    underscore();
+    console.log(wordToDisplay);
+    toggleReload();
 });
+
+
 
 // Tableaux de mots
 
 const animals = [
-  "Lion", "Éléphant", "Tigre", "Girafe", "Kangourou", "Hippopotame",
-  "Penguin", "Zèbre", "Koala", "Panda", "Rhino", "Ours Polaire",
-  "Guépard", "Gorille", "Koala", "Dauphin", "Hérisson", "Léopard",
-  "Puma", "Lémurien", "Pieuvre", "Caméléon", "Ornithorynque", "Autruche",
-  "Perroquet", "Hippocampe", "Jaguar", "Écureuil", "Kookaburra", "Paresseux",
-  "Pangolin", "Wallaby", "Tatou", "Pélican", "Narval", "Lynx",
-  "Lièvre", "Gazelle", "Crocodile", "Pigeon", "Fou de Bassan", "Gerbille",
-  "Hamster", "Wombat", "Mongoose", "Salamandre", "Porc-épic", "Frelon"
+    "LION", "ELEPHANT", "TIGRE", "GIRAFE", "KANGOUROU", "HIPPOPOTAME",
+    "PINGOUIN", "ZEBRE", "KOALA", "PANDA", "RHINO", "OURS POLAIRE",
+    "GUEPARD", "GORILLE", "KOALA", "DAUPHIN", "HERISSON", "LEOPARD",
+    "PUMA", "LEMURIEN", "PIEUVRE", "CAMELEON", "ORNITHORYNQUE", "AUTRUCHE",
+    "PERROQUET", "HIPPOCAMPE", "JAGUAR", "ECUREUIL", "KOOKABURRA", "PARESSEUX",
+    "PANGOLIN", "WALLABY", "TATOU", "PELICAN", "NARVAL", "LYNX",
+    "LIEVRE", "GAZELLE", "CROCODILE", "PIGEON", "FOU DE BASSAN", "GERBILLE",
+    "HAMSTER", "WOMBAT", "MANGOUSTE", "SALAMANDRE", "PORC EPIC", "FRELON"
 ];
 
 const countries = [
-  "France", "États-Unis", "Canada", "Royaume-Uni", "Allemagne", "Australie",
-  "Japon", "Chine", "Brésil", "Inde", "Mexique", "Russie",
-  "Italie", "Espagne", "Argentine", "Afrique du Sud", "Suède", "Norvège",
-  "Suisse", "Népal", "Thaïlande", "Indonésie", "Grèce", "Turquie",
-  "Égypte", "Maroc", "Kenya", "Nigeria", "Chili", "Pérou",
-  "Vietnam", "Malaisie", "Singapour", "Corée du Sud", "Nouvelle-Zélande", "Islande",
-  "Portugal", "Irlande", "Pays-Bas", "Belgique", "Autriche", "Danemark",
-  "Finlande", "République tchèque", "Hongrie", "Pologne", "Ukraine", "Croatie",
-  "Sri Lanka", "Pakistan", "Bangladesh", "Israël"
+    "FRANCE", "ETATS UNIS", "CANADA", "ROYAUME UNI", "ALLEMAGNE", "AUSTRALIE",
+    "JAPON", "CHINE", "BRESIL", "INDE", "MEXIQUE", "RUSSIE",
+    "ITALIE", "ESPAGNE", "ARGENTINE", "AFRIQUE DU SUD", "SUEDE", "NORVEGE",
+    "SUISSE", "NEPAL", "THAILANDE", "INDONESIE", "GRECE", "TURQUIE",
+    "EGYPTE", "MAROC", "KENYA", "NIGERIA", "CHILI", "PEROU",
+    "VIETNAM", "MALAISIE", "SINGAPOUR", "COREE DU SUD", "NOUVELLE ZELANDE", "ISLANDE",
+    "PORTUGAL", "IRLANDE", "PAYS BAS", "BELGIQUE", "AUTRICHE", "DANEMARK",
+    "FINLANDE", "REPUBLIQUE TCHEQUE", "HONGRIE", "POLOGNE", "UKRAINE", "CROATIE",
+    "SRI LANKA", "PAKISTAN", "BANGLADESH", "ECOSSE"
 ];
 
 const fruitsAndVegetables = [
-  "Pomme", "Banane", "Orange", "Fraise", "Cerise", "Poire",
-  "Raisin", "Kiwi", "Mangue", "Ananas", "Melon", "Pêche",
-  "Tomate", "Carotte", "Pomme de terre", "Concombre", "Courgette", "Aubergine",
-  "Brocoli", "Chou-fleur", "Laitue", "Épinard", "Poivron", "Radis",
-  "Oignon", "Ail", "Céleri", "Asperge", "Avocat", "Pamplemousse",
-  "Citron", "Pastèque", "Cassis", "Myrtille", "Framboise", "Canneberge",
-  "Poivron", "Patate douce", "Navet", "Betterave", "Endive", "Haricot vert",
-  "Courge", "Citrouille", "Figue", "Grenade", "Nectarine", "Kaki",
-  "Chou", "Artichaut", "Rutabaga"
+    "POMME", "BANANE", "ORANGE", "FRAISE", "CERISE", "POIRE",
+    "RAISIN", "KIWI", "MANGUE", "ANANAS", "MELON", "PECHE",
+    "TOMATE", "CAROTTE", "POMME DE TERRE", "CONCOMBRE", "COURGETTE", "AUBERGINE",
+    "BROCOLI", "CHOU FLEUR", "LAITUE", "EPINARD", "POIVRON", "RADIS",
+    "OIGNON", "AIL", "CELERI", "ASPERGE", "AVOCAT", "PAMPLEMOUSSE",
+    "CITRON", "PASTEQUE", "CASSIS", "MYRTILLE", "FRAMBOISE", "CANNEBERGE",
+    "POIVRON", "PATATE DOUCE", "NAVET", "BETTERAVE", "ENDIVE", "HARICOT VERT",
+    "COURGE", "CITROUILLE", "FIGUE", "GRENADE", "NECTARINE", "KAKI",
+    "CHOU", "ARTICHAUT", "RUTABAGA"
 ];
 
 const everydayObjects = [
-  "Téléphone", "Ordinateur", "Cafetière", "Télévision", "Réfrigérateur", "Table",
-  "Chaise", "Lampe", "Horloge", "Tasse", "Assiette", "Couteau",
-  "Four", "Micro-ondes", "Lave-linge", "Sèche-linge", "Canapé", "Clé",
-  "Porte", "Fenêtre", "Miroir", "Brosse à dents", "Toilettes", "Douche",
-  "Brosse à cheveux", "Livre", "Stylo", "Crayon", "Sac à main", "Portefeuille",
-  "Clé USB", "Lunettes", "Sous-verre", "Parapluie", "Poubelle", "Balai",
-  "Aspirateur", "Brosse à chaussures", "Bouteille d'eau", "Cadenas", "Serrure", "Cuisine",
-  "Évier", "Miroir de maquillage", "Boîte aux lettres", "Télécommande", "Cadenas", "Échelle",
-  "Radio", "Casque", "Sac à dos"
+    "TELEPHONE", "ORDINATEUR", "CAFETIERE", "TELEVISION", "REFRIGERATEUR", "TABLE",
+    "CHAISE", "LAMPE", "HORLOGE", "TASSE", "ASSIETTE", "COUTEAU",
+    "FOUR", "MICRO ONDES", "LAVE LINGE", "SECHE LINGE", "CANAPE", "CLEF",
+    "PORTE", "FENETRE", "MIROIR", "BROSSE A DENTS", "TOILETTES", "DOUCHE",
+    "BROSSE A CHEVEUX", "LIVRE", "STYLO", "CRAYON", "SAC A MAIN", "PORTEFEUILLE",
+    "CLE USB", "LUNETTES", "SOUS VERRE", "PARAPLUIE", "POUBELLE", "BALAI",
+    "ASPIRATEUR", "BROSSE A CHAUSSURE", "BOUTEILLE D EAU", "CADENAS", "SERRURE", "CUISINE",
+    "EVIER", "MIROIR DE MAQUILLAGE", "BOITE AUX LETTRES", "TELECOMMANDE", "CADENAS", "ECHELLE",
+    "RADIO", "CASQUE", "SAC A DOS"
 ];
 
 const movies = [
-  "Avatar", "Titanic", "Matrix", "Inception", "Jurassic", "Gladiator",
-  "Frozen", "Memento", "Jaws", "Braveheart", "Interstellar", "Gravity",
-  "Seven", "Pulp Fiction", "Scarface", "Shrek", "Superman", "Zodiac",
-  "Goonies", "Predator", "Die Hard", "Aliens", "Scream", "Psycho",
-  "Transformers", "Godzilla", "Amadeus", "Hannibal", "Mystic River", "Wolverine",
-  "Rocky", "Jumanji", "Zoolander", "Casino", "Twister", "Apocalypto",
-  "Tron", "Clerks", "Jaws", "Twilight", "Alien", "Grease", "Eragon",
-  "Tangled", "Shutter Island", "Beetle juice", "Halloween", "Joker", "Glory"
+    "AVATAR", "TITANIC", "MATRIX", "INCEPTION", "JURASSIC PARK", "GLADIATOR",
+    "LA REINE DES NEIGES", "MEMENTO", "LES DENTS DE LA MER", "BRAVEHEART", "INTERSTELLAR", "GRAVITY",
+    "SEVEN", "PULP FICTION", "SCARFACE", "SHREK", "SUPERMAN", "ZODIAC",
+    "LES GOONIES", "PREDATOR", "DIE HARD", "ALIENS", "SCREAM", "PSYCHOSE",
+    "TRANSFORMERS", "GODZILLA", "AMADEUS", "HANNIBAL", "MYSTIC RIVER", "WOLVERINE",
+    "ROCKY", "JUMANJI", "ZOOLANDER", "CASINO ROYAL", "TWISTER", "APOCALYPTO",
+    "TRON", "APOCALYPSE NOW", "TWILIGHT", "ALIEN", "GREASE", "ERAGON", "ROBOCOP",
+    "SHUTTER ISLAND", "BEETLE JUICE", "HALLOWEEN", "JOKER", "GLORY" 
 ];
 
-// image-0.png
-// image-1.png
-// image-2.png
-// image-3.png
-// let vie = 10;
+// Tableaux des images du pendu
 
-//  On commence avec l'image 10
-// document.querySelector(".image").src = "image-0.png";
-
-// src="image-[nombre de vie].png"
-
-// `image-${vie}.png`;
-// Vérifier lettre
-//   si pas bon
-//    appeler la fonction retirerVie
-// vie -= 1;
-// document.querySelector(#pendu)
-//  image. = nouvelle image
-
-// motADevenier = ["T", "A", "B", "L", "E"];
-// const motAfficher = []
-
-// for (let i = 0; i < motADevenier.length; i++) {
-    // if(motADevenier[i] != "-" && motADeviner[i] != " ") {
-    //     motAfficher[i] = lettre;
-// }
-    // else {
-    //     motAfficher[i] = motADevenier[i];
-    // }
-//     motAfficher.push("_");
-// }
+const hangmanImages = [
+    "src/images/hangman-1.png", "src/images/hangman-2.png", "src/images/hangman-3.png",
+    "src/images/hangman-4.png", "src/images/hangman-5.png", "src/images/hangman-6.png",
+    "src/images/hangman-7.png", "src/images/hangman-8.png", "src/images/hangman-9.png",
+    "src/images/hangman-10.png"
+];

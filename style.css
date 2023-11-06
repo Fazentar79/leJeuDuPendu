@@ -10,6 +10,7 @@
 
 html {
     min-width: 1200px;
+    overflow-x: hidden;
 }
 
 body {
@@ -51,7 +52,6 @@ p {
 }
 
 .text {
-   z-index: 1;
     position: absolute;
     text-align: center;
     margin: 0 auto; 
@@ -100,11 +100,25 @@ p {
     border-radius: 5px;
 }
 
+.text__menu-reload {
+    display: none;
+}
+
 .text__theme {
     font-size: 2.5em;
     left: 0;
-    right: 0;
+    right: -10%;
     top: 19.5%;
+}
+
+.hangman__image {
+    position: absolute;
+    background: url(src/images/hangman-1.png) no-repeat;
+    left: 40%;
+    right: 0;
+    top: 20%;
+    bottom: 0;
+    display: none;
 }
 
 .text__menu-findWord {
