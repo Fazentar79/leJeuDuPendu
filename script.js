@@ -17,6 +17,7 @@ let textFindWord = document.querySelector(".text__menu-findWord");
 let textWordToFind = document.querySelector(".text__wordToFind");
 let textChoiceTheme = document.querySelector(".text__theme");
 let letters = document.querySelectorAll(".letter");
+let alphabet = document.querySelector(".text__alphabet");
 let hangmanImage = document.querySelector(".hangman__image");
 
 // Variables pour le jeu
@@ -41,7 +42,6 @@ function toggleModalRules() {
     }else {
         rulesModal.style.display = "none";
         btnTheme.style.display = "block";
-        textFindWord.style.display = "block";
     }
 }
 
@@ -103,10 +103,11 @@ function wordFound() {
 
 // Défaite
 function lose() {
+    alphabet.style.display = "none";
     textFindWord.style.display = "none";
     textChoiceTheme.textContent = "Vous avez perdu !";
     textChoiceTheme.style.top = "15.6%";
-    textWordToFind.style.top = "63.5%";
+    textWordToFind.style.top = "68%";
     textWordToFind.style.fontSize = "2.5rem";
     textWordToFind.style.textTransform = "none";
     textWordToFind.textContent = "Le mot était : " + wordToGuess;
@@ -117,11 +118,12 @@ function lose() {
 
 // victoire
 function win() {
+    alphabet.style.display = "none";
     textFindWord.style.display = "none";
     textChoiceTheme.textContent = "Vous avez gagné !";
     hangmanImage.style.background = "url('src/images/hangman-11.png') no-repeat";
     textChoiceTheme.style.top = "15.6%";
-    textWordToFind.style.top = "63.5%";
+    textWordToFind.style.top = "68%";
     textWordToFind.style.fontSize = "2.5rem";
     textWordToFind.style.textTransform = "none";
     textWordToFind.textContent = "Le mot est bien : " + wordToGuess;
