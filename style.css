@@ -113,21 +113,17 @@ p {
 
 .hangman__image {
     position: absolute;
-    background: url(src/images/hangman-1.png) no-repeat;
     left: 40%;
     right: 0;
     top: 20%;
     bottom: 0;
-    display: none;
 }
 
 .text__menu-findWord {
     margin-top: 130px;
-}
-
-.text__menu-findWord span {
     font-size: 1.3em;
     font-weight: 500;
+    display: none;
 }
 
 .text__wordToFind {
@@ -141,22 +137,19 @@ p {
 .text__alphabet {    
     left: 0;
     right: -12%;
-    top: 72.5%;
+    top: 66%;
 }
 
 .text__alphabet li {
     display: inline-block;
-    font-size: 2.5rem;
-    line-height: 3.2em;
-    margin-right: 15px;
+    font-size: 3rem;
+    margin: 10px 15px 30px 15px;
     cursor: pointer;
 }
 
 .text__alphabet li:hover {
     transform: scale(1.2);
 }
-
-/* ID */
 
 #paper {
     width: 100%;
