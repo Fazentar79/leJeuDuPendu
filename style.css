@@ -152,9 +152,7 @@ p {
 }
 
 #paper {
-    width: 100%;
-    height: 100%;
-    margin: 1rem auto;
+    margin: 2rem auto;
 }
 
 #paper img {
@@ -167,5 +165,6 @@ p {
 #signing {
     font-size: 1.5rem;
     margin: 1rem auto;
-    top: 95%;
+    top: 94%;
+    right: 38%;
 }

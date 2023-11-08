@@ -106,6 +106,7 @@ function lose() {
     alphabet.style.display = "none";
     textFindWord.style.display = "none";
     textChoiceTheme.textContent = "Vous avez perdu !";
+    hangmanImage.style.background = "url('src/images/hangman-10.png') no-repeat";
     textChoiceTheme.style.top = "15.6%";
     textWordToFind.style.top = "68%";
     textWordToFind.style.fontSize = "2.5rem";
@@ -147,34 +148,27 @@ function checkLetter() {
         life++;
         switch (life) {
             case 1:
-                hangmanImage.style.background = "url('src/images/hangman-1.png') no-repeat";
-                break;
-            case 2:
                 hangmanImage.style.background = "url('src/images/hangman-2.png') no-repeat";
                 break;
-            case 3:
-                hangmanImage.style.background = "url('src/images/hangman-3.png') no-repeat";
-                break;
-            case 4:
+            case 2:
                 hangmanImage.style.background = "url('src/images/hangman-4.png') no-repeat";
                 break;
-            case 5:
+            case 3:
                 hangmanImage.style.background = "url('src/images/hangman-5.png') no-repeat";
                 break;
-            case 6:
+            case 4:
                 hangmanImage.style.background = "url('src/images/hangman-6.png') no-repeat";
                 break;
-            case 7:
+            case 5:
                 hangmanImage.style.background = "url('src/images/hangman-7.png') no-repeat";
                 break;
-            case 8:
+            case 6:
                 hangmanImage.style.background = "url('src/images/hangman-8.png') no-repeat";
                 break;
-            case 9:
+            case 7:
                 hangmanImage.style.background = "url('src/images/hangman-9.png') no-repeat";
                 break;
-            case 10:                
-                hangmanImage.style.background = "url('src/images/hangman-10.png') no-repeat";
+            case 8:                
                 lose();
                 break;
             default:
