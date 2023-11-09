@@ -9,7 +9,6 @@
 }
 
 html {
-    min-width: 1200px;
     overflow-x: hidden;
 }
 
@@ -80,7 +79,6 @@ p {
     left: -56.5%;
     right: 0;
     top: 13%;
-    z-index: 2;
     width: 13%;
 }
 
@@ -163,4 +161,47 @@ p {
     margin: 1rem auto;
     top: 94%;
     right: 38%;
+}
+
+@media screen and (max-width: 1920px) {
+    h1 {
+        font-size: 3em;
+    }
+    p {
+        font-size: 1em;
+    }
+    .text__menu li {
+        font-size: 1em;
+        line-height: 2em;
+    }
+    .text__theme {
+        font-size: 1.7em;
+    }
+    .text__menu {
+        left: -40.3%;
+        right: 0;
+        top: 13%;
+        width: 9.5%;
+    }
+    .hangman__image {
+        transform: scale(0.8);
+        left: 36%;
+        top: 11%;
+    }
+    .text__wordToFind {
+        top: 56%;
+    }
+    .text__alphabet {
+        right: -9%;    
+    }
+    .text__alphabet li {
+        font-size: 2em;
+        margin: 10px 10px 20px 10px;
+    }
+    #paper img {
+        width: 50%;
+    }
+    #signing {
+        top: 92%;
+    }
 }
