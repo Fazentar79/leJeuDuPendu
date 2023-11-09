@@ -1,18 +1,15 @@
-// Variables de sélection des modals
 let rulesModal = document.querySelector(".rules__modal");
 let btnRules = document.querySelector(".text__menu-rules");
 let themeModal = document.querySelector(".theme__modal");
 let btnTheme = document.querySelector(".text__menu-theme");
 let btnReload = document.querySelector(".text__menu-reload");
 
-// Variables de sélection des choix de thème
 let btnChoiceAnimals = document.querySelector(".theme__choice--animals");
 let btnChoicePays = document.querySelector(".theme__choice--pays");
 let btnChoiceFruitsAndVegetables = document.querySelector(".theme__choice--fruitsAndVegetables");
 let btnChoiceEverydayObjects = document.querySelector(".theme__choice--everydayObjects");
 let btnChoiceMovies = document.querySelector(".theme__choice--movies");
 
-// Variables pour le DOM
 let textFindWord = document.querySelector(".text__menu-findWord");
 let textWordToFind = document.querySelector(".text__wordToFind");
 let textChoiceTheme = document.querySelector(".text__theme");
@@ -20,7 +17,6 @@ let letters = document.querySelectorAll(".letter");
 let alphabet = document.querySelector(".text__alphabet");
 let hangmanImage = document.querySelector(".hangman__image");
 
-// Variables pour le jeu
 let choiceStartTheme = textChoiceTheme;
 let chosenLetter;
 let chosenTheme;
@@ -28,6 +24,9 @@ let wordToGuess;
 let wordToDisplay = [];
 let wordDiscovered;
 let life = 0;
+let soundPen = new Audio("src/sounds/pen.mp3");
+let soundWin = new Audio("src/sounds/victory.wav");
+let soundLose = new Audio("src/sounds/lose.mp3");
 
 // Fonctions du jeu
 function underscoreAndSpace() {
@@ -54,7 +53,6 @@ function randomWord() {
     btnRules.style.display = "none";
 }
 
-// Logique du jeu
 function checkLetter() {
     let foundLetter = false;
     for (let i = 0; i < wordToGuess.length; i++) {
@@ -62,6 +60,7 @@ function checkLetter() {
             textWordToFind.textContent = textWordToFind.textContent.substring(0, i) + chosenLetter + textWordToFind.textContent.substring(i + 1);
             wordToDisplay[i] = chosenLetter;
             foundLetter = true;
+            soundPen.play();
         } else if (textWordToFind.textContent === wordToGuess) {
             win();
         }
@@ -71,24 +70,31 @@ function checkLetter() {
         switch (life) {
             case 1:
                 hangmanImage.style.background = "url('src/images/hangman-2.png') no-repeat";
+                soundPen.play();
                 break;
             case 2:
                 hangmanImage.style.background = "url('src/images/hangman-4.png') no-repeat";
+                soundPen.play();
                 break;
             case 3:
                 hangmanImage.style.background = "url('src/images/hangman-5.png') no-repeat";
+                soundPen.play();
                 break;
             case 4:
                 hangmanImage.style.background = "url('src/images/hangman-6.png') no-repeat";
+                soundPen.play();
                 break;
             case 5:
                 hangmanImage.style.background = "url('src/images/hangman-7.png') no-repeat";
+                soundPen.play();
                 break;
             case 6:
                 hangmanImage.style.background = "url('src/images/hangman-8.png') no-repeat";
+                soundPen.play();
                 break;
             case 7:
                 hangmanImage.style.background = "url('src/images/hangman-9.png') no-repeat";
+                soundPen.play();
                 break;
             case 8:                
                 lose();
@@ -100,12 +106,12 @@ function checkLetter() {
     }
 }
 
-// Défaite
 function lose() {
     alphabet.style.display = "none";
     textFindWord.style.display = "none";
     textChoiceTheme.textContent = "Vous avez perdu !";
     hangmanImage.style.background = "url('src/images/hangman-10.png') no-repeat";
+    soundLose.play();
     textChoiceTheme.style.top = "15.6%";
     textWordToFind.style.top = "68%";
     textWordToFind.style.fontSize = "2.5em";
@@ -113,15 +119,15 @@ function lose() {
     textWordToFind.textContent = "Le mot était : " + wordToGuess;
     setTimeout(() => {
         location.reload();
-    }, 5000);
+    }, 10000);
 }
 
-// victoire
 function win() {
     alphabet.style.display = "none";
     textFindWord.style.display = "none";
     textChoiceTheme.textContent = "Vous avez gagné !";
     hangmanImage.style.background = "url('src/images/hangman-11.png') no-repeat";
+    soundWin.play();
     textChoiceTheme.style.top = "15.6%";
     textWordToFind.style.top = "68%";
     textWordToFind.style.fontSize = "2.5em";
@@ -162,7 +168,6 @@ btnTheme.addEventListener("click", () => {
     }
 });
 
-// Reload du jeu
 btnReload.addEventListener("click", () => {
     location.reload();
 });
@@ -181,14 +186,14 @@ letters.forEach((letter) => {
 
 // bouton : mot trouvé ?
 textFindWord.addEventListener("click", () => {
-    wordDiscovered = prompt("Quel est le mot à deviner ? (en majuscule)");
+    wordDiscovered = prompt("Quel est le mot à deviner ?").toUpperCase();
     if (wordDiscovered === wordToGuess) {
         win();
     } else if (wordDiscovered === null || wordDiscovered === "") {
         alert("Vous devez entrer un mot.");
     }else {
         alert("Le mot n'est pas correct.");
-        life++;
+        checkLetter();
     }
     return wordDiscovered.split("");
 });
@@ -199,6 +204,7 @@ btnChoiceAnimals.addEventListener("click", () => {
     textChoiceTheme.textContent = "Thème choisi : Animaux";
     chosenTheme = animals;
     randomWord();
+    console.log(wordToGuess);
 });
 
 btnChoicePays.addEventListener("click", () => {
@@ -228,8 +234,6 @@ btnChoiceMovies.addEventListener("click", () => {
     chosenTheme = movies;
     randomWord();
 });
-
-// Tableaux de mots
 
 const animals = [
     "LION", "ELEPHANT", "TIGRE", "GIRAFE", "KANGOUROU", "HIPPOPOTAME",
