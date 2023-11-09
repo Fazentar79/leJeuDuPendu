@@ -204,7 +204,6 @@ btnChoiceAnimals.addEventListener("click", () => {
     textChoiceTheme.textContent = "Thème choisi : Animaux";
     chosenTheme = animals;
     randomWord();
-    console.log(wordToGuess);
 });
 
 btnChoicePays.addEventListener("click", () => {
