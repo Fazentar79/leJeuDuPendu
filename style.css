@@ -38,8 +38,6 @@ p {
     margin-bottom: 1em;
 }
 
-/* Classes pour directement initialisé les flex et les éléments*/
-
 .flex {
     display: flex;
     justify-content: center;
@@ -63,7 +61,6 @@ p {
     margin: 0 auto;
     position: relative;
 }
-/* Modals du menu */
 
 .rules__modal, .theme__modal {
     display: none;
@@ -72,8 +69,6 @@ p {
 .rules__modal-content {
     margin-top: 11px;
 }
-
-/* Placement des éléments texte */
 
 .text__title {    
     left: 0;

@@ -28,7 +28,7 @@ let soundPen = new Audio("src/sounds/pen.mp3");
 let soundWin = new Audio("src/sounds/victory.wav");
 let soundLose = new Audio("src/sounds/lose.mp3");
 
-// Fonctions du jeu
+// Game functions
 function underscoreAndSpace() {
     for (let i = 0; i < wordToGuess.length; i++) {
         if (wordToGuess[i] != " ") {
@@ -138,10 +138,10 @@ function win() {
     }, 10000);
 }
 
-// Choix du thème de départ
+// Choice of starting theme
 choiceStartTheme.textContent = "Choisissez un thème dans la marge.";
 
-// Ouverture ou fermeture des modals
+// Opening or closing modals
 btnRules.addEventListener("click", () => {
     if (rulesModal.style.display === "block") {
         rulesModal.style.display = "none";
@@ -172,7 +172,7 @@ btnReload.addEventListener("click", () => {
     location.reload();
 });
 
-// Choix de lettre
+// Choice letter
 letters.forEach((letter) => {
     letter.addEventListener("click", () => {
         chosenLetter = letter.outerText;
@@ -184,7 +184,7 @@ letters.forEach((letter) => {
     });
 });
 
-// bouton : mot trouvé ?
+// button : mot trouvé ?
 textFindWord.addEventListener("click", () => {
     wordDiscovered = prompt("Quel est le mot à deviner ?").toUpperCase();
     if (wordDiscovered === wordToGuess) {
@@ -198,7 +198,7 @@ textFindWord.addEventListener("click", () => {
     return wordDiscovered.split("");
 });
 
-// Choix du thème
+// Choice theme
 btnChoiceAnimals.addEventListener("click", () => {
     textChoiceTheme.textContent = "";
     textChoiceTheme.textContent = "Thème choisi : Animaux";
