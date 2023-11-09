@@ -29,60 +29,8 @@ let wordToDisplay = [];
 let wordDiscovered;
 let life = 0;
 
-// Choix du thème de départ
-choiceStartTheme.textContent = "Choisissez un thème dans la marge.";
-
-// Affiche ou cache les modals
-function toggleModalRules() {
-    if (rulesModal.style.display === "none" || btnRules.addEventListener("mouseover", toggleModalRules)) {
-        rulesModal.style.display = "block";
-        btnTheme.style.display = "none";
-        textFindWord.style.display = "none";
-        btnReload.style.display = "none";
-    }else {
-        rulesModal.style.display = "none";
-        btnTheme.style.display = "block";
-    }
-}
-
-function toggleMenu () {
-    themeModal.style.display = "none";
-    btnRules.style.display = "block";
-    textFindWord.style.display = "block";
-    textFindWord.style.display = "block";
-}
-
-function toggleReload() {
-    btnTheme.style.display = "none";
-    btnReload.style.display = "block";
-}
-
-btnRules.addEventListener("mouseout", toggleModalRules);
-
-btnTheme.addEventListener("click", () => { 
-    themeModal.style.display = "block";
-    btnRules.style.display = "none";
-    textFindWord.style.display = "none";
-});
-
-//Changement sur le DOM et le thème choisi
-function changeTheme() {    
-    toggleMenu();
-    btnRules.style.display = "none";    
-    randomWord();
-    wordToDisplay = wordToGuess.split("");
-    underscore();
-    console.log(wordToDisplay);
-    toggleReload();    
-}
-
-//Choix aléatoire du mot à deviner selon le thème choisi
-function randomWord() {
-    wordToGuess = chosenTheme[Math.floor(Math.random() * chosenTheme.length)];
-}
-
-// Logique pour afficher les underscore et les espaces du mot à deviner
-function underscore() {
+// Fonctions du jeu
+function underscoreAndSpace() {
     for (let i = 0; i < wordToGuess.length; i++) {
         if (wordToGuess[i] != " ") {
             textWordToFind.textContent += "_";
@@ -94,43 +42,16 @@ function underscore() {
     }
 }
 
-// mot trouvé
-function wordFound() {
-    if (textWordToFind.textContent === wordToGuess) {
-            win();
-        }
-}
-
-// Défaite
-function lose() {
-    alphabet.style.display = "none";
-    textFindWord.style.display = "none";
-    textChoiceTheme.textContent = "Vous avez perdu !";
-    hangmanImage.style.background = "url('src/images/hangman-10.png') no-repeat";
-    textChoiceTheme.style.top = "15.6%";
-    textWordToFind.style.top = "68%";
-    textWordToFind.style.fontSize = "2.5rem";
-    textWordToFind.style.textTransform = "none";
-    textWordToFind.textContent = "Le mot était : " + wordToGuess;
-    setTimeout(() => {
-        location.reload();
-    }, 5000);
-}
-
-// victoire
-function win() {
-    alphabet.style.display = "none";
-    textFindWord.style.display = "none";
-    textChoiceTheme.textContent = "Vous avez gagné !";
-    hangmanImage.style.background = "url('src/images/hangman-11.png') no-repeat";
-    textChoiceTheme.style.top = "15.6%";
-    textWordToFind.style.top = "68%";
-    textWordToFind.style.fontSize = "2.5rem";
-    textWordToFind.style.textTransform = "none";
-    textWordToFind.textContent = "Le mot est bien : " + wordToGuess;
-    setTimeout(() => {
-        location.reload();
-    }, 10000);
+function randomWord() {
+    wordToGuess = chosenTheme[Math.floor(Math.random() * chosenTheme.length)];
+    wordToDisplay = wordToGuess.split("");
+    underscoreAndSpace();
+    btnTheme.style.display = "none";
+    themeModal.style.display = "none";
+    btnRules.style.display = "block";
+    textFindWord.style.display = "block";
+    btnReload.style.display = "block";
+    btnRules.style.display = "none";
 }
 
 // Logique du jeu
@@ -141,8 +62,9 @@ function checkLetter() {
             textWordToFind.textContent = textWordToFind.textContent.substring(0, i) + chosenLetter + textWordToFind.textContent.substring(i + 1);
             wordToDisplay[i] = chosenLetter;
             foundLetter = true;
+        } else if (textWordToFind.textContent === wordToGuess) {
+            win();
         }
-        wordFound();
     }
     if (!foundLetter) {
         life++;
@@ -178,7 +100,67 @@ function checkLetter() {
     }
 }
 
+// Défaite
+function lose() {
+    alphabet.style.display = "none";
+    textFindWord.style.display = "none";
+    textChoiceTheme.textContent = "Vous avez perdu !";
+    hangmanImage.style.background = "url('src/images/hangman-10.png') no-repeat";
+    textChoiceTheme.style.top = "15.6%";
+    textWordToFind.style.top = "68%";
+    textWordToFind.style.fontSize = "2.5em";
+    textWordToFind.style.textTransform = "none";
+    textWordToFind.textContent = "Le mot était : " + wordToGuess;
+    setTimeout(() => {
+        location.reload();
+    }, 5000);
+}
 
+// victoire
+function win() {
+    alphabet.style.display = "none";
+    textFindWord.style.display = "none";
+    textChoiceTheme.textContent = "Vous avez gagné !";
+    hangmanImage.style.background = "url('src/images/hangman-11.png') no-repeat";
+    textChoiceTheme.style.top = "15.6%";
+    textWordToFind.style.top = "68%";
+    textWordToFind.style.fontSize = "2.5em";
+    textWordToFind.style.textTransform = "none";
+    textWordToFind.textContent = "Le mot est bien : " + wordToGuess;
+    setTimeout(() => {
+        location.reload();
+    }, 10000);
+}
+
+// Choix du thème de départ
+choiceStartTheme.textContent = "Choisissez un thème dans la marge.";
+
+// Ouverture ou fermeture des modals
+btnRules.addEventListener("click", () => {
+    if (rulesModal.style.display === "block") {
+        rulesModal.style.display = "none";
+        btnTheme.style.display = "block";
+        
+    }else {
+        rulesModal.style.display = "block";
+        btnTheme.style.display = "none";
+        textFindWord.style.display = "none";
+        btnReload.style.display = "none";
+    }
+});
+
+btnTheme.addEventListener("click", () => {
+    if (themeModal.style.display === "block") {
+        themeModal.style.display = "none";
+        btnRules.style.display = "block";
+        
+    } else {
+        themeModal.style.display = "block";
+        btnRules.style.display = "none";
+        textFindWord.style.display = "none";
+        btnReload.style.display = "none";
+    }
+});
 
 // Reload du jeu
 btnReload.addEventListener("click", () => {
@@ -202,7 +184,9 @@ textFindWord.addEventListener("click", () => {
     wordDiscovered = prompt("Quel est le mot à deviner ? (en majuscule)");
     if (wordDiscovered === wordToGuess) {
         win();
-    } else {
+    } else if (wordDiscovered === null || wordDiscovered === "") {
+        alert("Vous devez entrer un mot.");
+    }else {
         alert("Le mot n'est pas correct.");
         life++;
     }
@@ -214,35 +198,35 @@ btnChoiceAnimals.addEventListener("click", () => {
     textChoiceTheme.textContent = "";
     textChoiceTheme.textContent = "Thème choisi : Animaux";
     chosenTheme = animals;
-    changeTheme();
+    randomWord();
 });
 
 btnChoicePays.addEventListener("click", () => {
     textChoiceTheme.textContent = "";
     textChoiceTheme.textContent = "Thème choisi : Pays";
     chosenTheme = countries;
-    changeTheme();
+    randomWord();
 });
 
 btnChoiceFruitsAndVegetables.addEventListener("click", () => {
     textChoiceTheme.textContent = "";
     textChoiceTheme.textContent = "Thème choisi : Fruits et légumes";
     chosenTheme = fruitsAndVegetables;
-    changeTheme();
+    randomWord();
 });
 
 btnChoiceEverydayObjects.addEventListener("click", () => {
     textChoiceTheme.textContent = "";
     textChoiceTheme.textContent = "Thème choisi : Objets du quotidien";
     chosenTheme = everydayObjects;
-    changeTheme();
+    randomWord();
 });
 
 btnChoiceMovies.addEventListener("click", () => {
     textChoiceTheme.textContent = "";
     textChoiceTheme.textContent = "Thème choisi : Films";
     chosenTheme = movies;
-    changeTheme();
+    randomWord();
 });
 
 // Tableaux de mots
