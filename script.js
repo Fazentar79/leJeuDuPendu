@@ -223,7 +223,7 @@ btnChoiceFruitsAndVegetables.addEventListener("click", () => {
 
 btnChoiceEverydayObjects.addEventListener("click", () => {
     textChoiceTheme.textContent = "";
-    textChoiceTheme.textContent = "Thème choisi : Objets du quotidien";
+    textChoiceTheme.textContent = "Thème choisi : Objets divers";
     chosenTheme = everydayObjects;
     randomWord();
 });
