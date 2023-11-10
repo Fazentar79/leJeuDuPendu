@@ -59,7 +59,7 @@ function checkLetter() {
         if (chosenLetter === wordToGuess[i]) {
             textWordToFind.textContent = textWordToFind.textContent.substring(0, i) + chosenLetter + textWordToFind.textContent.substring(i + 1);
             wordToDisplay[i] = chosenLetter;
-            foundLetter = true;
+            foundLetter = true;            
             soundPen.play();
         } else if (textWordToFind.textContent === wordToGuess) {
             win();
@@ -112,9 +112,10 @@ function lose() {
     textChoiceTheme.textContent = "Vous avez perdu !";
     hangmanImage.style.background = "url('src/images/hangman-10.png') no-repeat";
     soundLose.play();
-    textChoiceTheme.style.top = "15.6%";
+    textChoiceTheme.style.top = "15.5%";
     textWordToFind.style.top = "68%";
-    textWordToFind.style.fontSize = "2.5em";
+    textWordToFind.style.right = "0";
+    textWordToFind.style.fontSize = "1.5em";
     textWordToFind.style.textTransform = "none";
     textWordToFind.textContent = "Le mot était : " + wordToGuess;
     setTimeout(() => {
@@ -128,9 +129,10 @@ function win() {
     textChoiceTheme.textContent = "Vous avez gagné !";
     hangmanImage.style.background = "url('src/images/hangman-11.png') no-repeat";
     soundWin.play();
-    textChoiceTheme.style.top = "15.6%";
+    textChoiceTheme.style.top = "15.5%";
     textWordToFind.style.top = "68%";
-    textWordToFind.style.fontSize = "2.5em";
+    textWordToFind.style.right = "0";
+    textWordToFind.style.fontSize = "1.5em";
     textWordToFind.style.textTransform = "none";
     textWordToFind.textContent = "Le mot est bien : " + wordToGuess;
     setTimeout(() => {
@@ -158,8 +160,7 @@ btnRules.addEventListener("click", () => {
 btnTheme.addEventListener("click", () => {
     if (themeModal.style.display === "block") {
         themeModal.style.display = "none";
-        btnRules.style.display = "block";
-        
+        btnRules.style.display = "block";        
     } else {
         themeModal.style.display = "block";
         btnRules.style.display = "none";
