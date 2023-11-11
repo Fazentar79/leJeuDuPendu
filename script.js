@@ -61,7 +61,6 @@ function checkLetter() {
             wordToDisplay[i] = chosenLetter;
             foundLetter = true;            
             soundPen.play();
-        } else if (textWordToFind.textContent === wordToGuess) {
             win();
         }
     }
@@ -124,20 +123,22 @@ function lose() {
 }
 
 function win() {
-    alphabet.style.display = "none";
-    textFindWord.style.display = "none";
-    textChoiceTheme.textContent = "Vous avez gagné !";
-    hangmanImage.style.background = "url('src/images/hangman-11.png') no-repeat";
-    soundWin.play();
-    textChoiceTheme.style.top = "15.5%";
-    textWordToFind.style.top = "68%";
-    textWordToFind.style.right = "0";
-    textWordToFind.style.fontSize = "1.5em";
-    textWordToFind.style.textTransform = "none";
-    textWordToFind.textContent = "Le mot est bien : " + wordToGuess;
-    setTimeout(() => {
-        location.reload();
-    }, 10000);
+    if (textWordToFind.textContent === wordToGuess) {
+        alphabet.style.display = "none";
+        textFindWord.style.display = "none";
+        textChoiceTheme.textContent = "Vous avez gagné !";
+        hangmanImage.style.background = "url('src/images/hangman-11.png') no-repeat";
+        soundWin.play();
+        textChoiceTheme.style.top = "15.5%";
+        textWordToFind.style.top = "68%";
+        textWordToFind.style.right = "0";
+        textWordToFind.style.fontSize = "1.5em";
+        textWordToFind.style.textTransform = "none";
+        textWordToFind.textContent = "Le mot est bien : " + wordToGuess;
+        setTimeout(() => {
+            location.reload();
+        }, 10000);
+    }
 }
 
 // Choice of starting theme
