@@ -1,8 +1,4 @@
 @font-face {
-    font-family: 'creativo';
-    src: url(src/fonts/creativoRegular.otf);
-}
-@font-face {
     font-family: 'scriptRegular';
     src: url(src/fonts/script.otf);
 }
@@ -21,7 +17,6 @@ html {
 }
 
 body {
-    /* font-family: 'creativo', sans-serif; */
     font-family: 'scriptRegular', sans-serif;
     font-size: 1.2em;
     color: #333;
