@@ -123,7 +123,7 @@ function lose() {
 }
 
 function win() {
-    if (textWordToFind.textContent === wordToGuess) {
+    if (textWordToFind.textContent === wordToGuess || wordDiscovered === wordToGuess) {
         alphabet.style.display = "none";
         textFindWord.style.display = "none";
         textChoiceTheme.textContent = "Vous avez gagné !";
